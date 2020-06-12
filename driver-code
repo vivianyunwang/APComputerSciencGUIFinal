@@ -1,0 +1,493 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import net.miginfocom.swing.MigLayout;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+
+import java.awt.Color;
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
+import javax.swing.JLabel;
+import javax.swing.ButtonGroup;
+import javax.swing.JComboBox;
+import javax.swing.JRadioButton;
+import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import java.awt.Font;
+import javax.swing.JCheckBox;
+
+public class Driver extends JFrame 
+{
+
+	private JPanel contentPane;
+	private String[] theNames = {"Pippin", "Percy", "Petunia"};
+	private String[] theBreeds = {"Texel", "Peruvian", "Teddy"};
+	private String[] theAdoptionFees = {"888", "808", "880"};
+	private JTextField endTextField;
+	private JTextField secondEndTextField;
+	private JTextField finalQuestionTextField;
+	private ArrayList<PoofyPurrfectPets> printedResults = new ArrayList<PoofyPurrfectPets>();
+	
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable() 
+		{
+			public void run() 
+			{
+				try 
+				{
+					Driver frame = new Driver();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	public class PoofyPurrfectPets 
+	{
+		private String myInitialPetConsideration;
+		private String myFinalDecision;
+		private String myFirstLastName;
+		private String myPhoneNumber;
+		private String myAvailability;
+		private String myHowFindOut;
+		
+		public PoofyPurrfectPets(String initialPetConsideration, String finalDecision, String firstLastName, String phoneNumber, String availability, String howFindOut)
+		{
+			myInitialPetConsideration = initialPetConsideration;
+			myFinalDecision = finalDecision;
+			myFirstLastName = firstLastName;
+			myPhoneNumber = phoneNumber;
+			myAvailability = availability;
+			myHowFindOut = howFindOut;
+		}
+		
+		public String getInitialConsideration()
+		{
+			return myInitialPetConsideration;
+		}
+		
+		public String getFinalDecision()
+		{
+			return myFinalDecision;
+		}
+		
+		public String getName()
+		{
+			return myFirstLastName;
+		}
+		
+		public String getPhoneNumber()
+		{
+			return myPhoneNumber;
+		}
+		
+		public String getAvailability()
+		{
+			return myAvailability;
+		}
+		
+		public String getHowFindOut()
+		{
+			return myHowFindOut;
+		}
+	}
+	
+	/**
+	 * Create the frame.
+	 */
+	public Driver() 
+	{
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 707, 447);
+		
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(new MigLayout("", "[grow]", "[grow]"));
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		contentPane.add(tabbedPane, "cell 0 0,grow");
+		
+		JPanel welcomePanel = new JPanel();
+		tabbedPane.addTab("Welcome!", null, welcomePanel, null);
+		welcomePanel.setLayout(new MigLayout("", "[][grow][][]", "[][][]"));
+		
+		JLabel coverPageInfoLabel = new JLabel("");
+		welcomePanel.add(coverPageInfoLabel, "cell 0 0");
+		
+		JPanel pipPercPanel = new JPanel();
+		tabbedPane.addTab("Catalog", null, pipPercPanel, null);
+		pipPercPanel.setLayout(new MigLayout("", "[][][][][][][][][]", "[][][]"));
+		
+		JPanel describePetuniaPanel = new JPanel();
+		tabbedPane.addTab("Catalog Cont.", null, describePetuniaPanel, null);
+		describePetuniaPanel.setLayout(new MigLayout("", "[][][][][]", "[][][][][][][][][]"));
+		
+		JPanel panel = new JPanel();
+		tabbedPane.addTab("About You", null, panel, null);
+		
+		JPanel confirmPanel = new JPanel();
+		tabbedPane.addTab("Confirm Adoption", null, confirmPanel, null);
+		confirmPanel.setLayout(new MigLayout("", "[][][][][][grow][][][][]", "[][][][][][][][][][][][]"));
+		
+		JPanel allDetails = new JPanel();
+		tabbedPane.addTab("Details", null, allDetails, null);
+		confirmPanel.setLayout(new MigLayout("", "[][][][][][grow][][][][]", "[][][][][][][][][][][][]"));
+		
+		JLabel clarifyLabel = new JLabel("");
+		describePetuniaPanel.add(clarifyLabel, "cell 1 0");
+		
+		JLabel consideringGuineaPigsLabel = new JLabel("Which guinea pig are you considering to adopt?");
+		consideringGuineaPigsLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
+		describePetuniaPanel.add(consideringGuineaPigsLabel, "cell 4 1");
+		
+		JCheckBox pippinCheckBox = new JCheckBox("Pippin");
+		describePetuniaPanel.add(pippinCheckBox, "cell 4 2");
+		
+		JLabel describePetunia = new JLabel("Petunia: loves to go on walks, social, rare breed");
+		describePetunia.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
+		describePetuniaPanel.add(describePetunia, "cell 1 3");
+		
+		JCheckBox percyCheckBox = new JCheckBox("Percy");
+		describePetuniaPanel.add(percyCheckBox, "cell 4 3");
+		
+		JCheckBox petuniaCheckBox = new JCheckBox("Petunia");
+		describePetuniaPanel.add(petuniaCheckBox, "cell 4 4");
+		
+		JLabel petuniaIcon = new JLabel("");
+		petuniaIcon.setIcon(new ImageIcon("/Users/vivianwang/Downloads/5b604f70011ea3794d2abceec8e113d1.jpg"));
+		describePetuniaPanel.add(petuniaIcon, "cell 1 5");
+		
+
+		//table #1 to display items
+		DefaultTableModel petTable = new DefaultTableModel();
+		petTable.addColumn("Name");
+		petTable.addColumn("Breed");
+		petTable.addColumn("Adoption Fee ($)");
+		for (int i = 0; i < 3; i++)
+		{
+			petTable.insertRow(i, new String[] { theNames[i], theBreeds[i], theAdoptionFees[i] });
+		}
+		
+		//table from reading the file
+		DefaultTableModel adoptionsModel = new DefaultTableModel();
+		adoptionsModel.addColumn("Initial Choice");
+		adoptionsModel.addColumn("Final Choice");
+		adoptionsModel.addColumn("Name");
+		adoptionsModel.addColumn("Phone #");
+		adoptionsModel.addColumn("Availability");
+		adoptionsModel.addColumn("How did you find out?");
+
+		JTable tableOfConfirmed = new JTable(adoptionsModel);
+		JScrollPane scrollP = new JScrollPane(tableOfConfirmed);
+		allDetails.add(scrollP, "cell 1 0");
+		
+		ButtonGroup radButGroupSelectedPet = new ButtonGroup();
+		
+		JLabel descriptionGPigLabel = new JLabel("");
+		pipPercPanel.add(descriptionGPigLabel, "cell 0 1");
+		
+		JLabel pipImage = new JLabel("");
+		pipImage.setIcon(new ImageIcon("/Users/vivianwang/Downloads/256x256bb.jpg"));
+		pipPercPanel.add(pipImage, "cell 1 1");
+		
+		JLabel pippinLabel = new JLabel("");
+		pipPercPanel.add(pippinLabel, "cell 3 1");
+		
+		JLabel percImage = new JLabel("");
+		percImage.setIcon(new ImageIcon("/Users/vivianwang/Downloads/GuineaPigBlog.256.444912.jpg"));
+		pipPercPanel.add(percImage, "cell 5 1");
+		
+		JLabel describePipLabel = new JLabel("Pippin: friendly, outgoing, loves to eat, sometimes lazy");
+		describePipLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
+		pipPercPanel.add(describePipLabel, "cell 1 2");
+		
+		JLabel describePercLabel = new JLabel("Percy: always scared, has nice fur, loves grass");
+		describePercLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
+		pipPercPanel.add(describePercLabel, "cell 5 2");
+		welcomePanel.setLayout(new MigLayout("", "[][][][]", "[][]"));
+		welcomePanel.setLayout(new MigLayout("", "[][][][]", "[][]"));
+		
+		JLabel welcomeLabel = new JLabel("Welcome to Poofy Purrfect Pets!");
+		welcomeLabel.setFont(new Font("Monaco", Font.ITALIC, 24));
+		welcomePanel.add(welcomeLabel, "flowy,cell 1 0");
+		
+		JLabel welcomePhoto = new JLabel("");
+		welcomePhoto.setIcon(new ImageIcon("/Users/vivianwang/Downloads/256x256bb (1).jpg"));
+		welcomePanel.add(welcomePhoto, "flowx,cell 1 1");
+		
+		JLabel welcomeTagline = new JLabel("Your one stop center for adopting your next furrever and best friend");
+		welcomePanel.add(welcomeTagline, "cell 1 0");
+		
+		JLabel secondWelcomePhoto = new JLabel("");
+		secondWelcomePhoto.setIcon(new ImageIcon("/Users/vivianwang/Downloads/VegaAltair186.256.368731.jpg"));
+		welcomePanel.add(secondWelcomePhoto, "cell 1 1");
+		
+		JLabel disclaimerLabel = new JLabel("Disclaimer: Our whole adoption center only has 3 pets");
+		welcomePanel.add(disclaimerLabel, "cell 1 2");
+		
+		JLabel welcomeBack = new JLabel("Welcome back to Poofy Purrfect Pets!");
+		welcomeBack.setVerticalAlignment(SwingConstants.TOP);
+		panel.add(welcomeBack, "cell 0 0");
+		
+		JTable tableOfPets = new JTable(petTable);
+		JScrollPane scrollMenu = new JScrollPane(tableOfPets);
+
+		panel.add(scrollMenu, "cell 1 0");
+		panel.setLayout(new MigLayout("", "[grow][grow]", "[][][][]"));
+		panel.setLayout(new MigLayout("", "[]", "[]"));
+		panel.setLayout(new MigLayout("", "[]", "[]"));
+		
+		
+		JButton btnNewButton = new JButton("Click here to move to final step!");
+		btnNewButton.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+		panel.add(btnNewButton, "cell 0 1");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.setSelectedIndex(4);
+			}
+		});
+		
+		
+		JLabel selectPetLabel = new JLabel("Select which shelter pet you'd like to adopt:");
+		panel.add(selectPetLabel, "cell 1 1");
+		
+		
+
+		
+		JLabel adoptionFeeLabel = new JLabel("Your adoption fee: $0");
+		panel.add(adoptionFeeLabel, "cell 0 3");
+		
+		JRadioButton pippinRadButton = new JRadioButton("Pippin");
+		panel.add(pippinRadButton, "cell 1 3");
+		radButGroupSelectedPet.add(pippinRadButton);
+		pippinRadButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				adoptionFeeLabel.setText("Your adoption fee: $888");
+			}
+		});
+		
+		JRadioButton percyRadButton = new JRadioButton("Percy");
+		panel.add(percyRadButton, "cell 1 3");
+		radButGroupSelectedPet.add(percyRadButton);
+		
+		JRadioButton petuniaRadButton = new JRadioButton("Petunia");
+		panel.add(petuniaRadButton, "cell 1 3");
+		petuniaRadButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				adoptionFeeLabel.setText("Your adoption fee: $880");
+			}
+		});
+		
+		radButGroupSelectedPet.add(petuniaRadButton);
+		radButGroupSelectedPet.add(percyRadButton);
+		radButGroupSelectedPet.add(pippinRadButton);
+
+		
+		percyRadButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				adoptionFeeLabel.setText("Your adoption fee: $808");
+			}
+		});
+		
+		
+		
+		
+		JLabel confirmLabel = new JLabel("Ready to adopt your pet? Please complete this form to confirm the adoption.");
+		confirmPanel.add(confirmLabel, "cell 5 0,alignx left");
+		
+		
+		JLabel nameLabel = new JLabel("Your First & Last Name");
+		confirmPanel.add(nameLabel, "cell 5 2");
+		
+		endTextField = new JTextField();
+		confirmPanel.add(endTextField, "cell 5 3,growx");
+		endTextField.setColumns(10);
+		
+		JLabel phoneLabel = new JLabel("Your Phone Number");
+		confirmPanel.add(phoneLabel, "cell 5 4");
+		
+		secondEndTextField = new JTextField();
+		confirmPanel.add(secondEndTextField, "cell 5 5,growx");
+		secondEndTextField.setColumns(10);
+		
+		JLabel labelForAvailQuestion = new JLabel("When are you available to pick up your new furry friend?");
+		confirmPanel.add(labelForAvailQuestion, "cell 5 6");
+		
+		JComboBox comboBox = new JComboBox();
+		confirmPanel.add(comboBox, "cell 5 7");
+		comboBox.addItem("Sunday");
+		comboBox.addItem("Monday");
+		comboBox.addItem("Tuesday");
+		comboBox.addItem("Wednesday");
+		comboBox.addItem("Thursday");
+		comboBox.addItem("Friday");
+		comboBox.addItem("Saturday");
+		
+		JLabel findOutLabel = new JLabel("How did you find out about our adoption center (social media, word of mouth, etc)?");
+		confirmPanel.add(findOutLabel, "cell 5 8");
+		
+		finalQuestionTextField = new JTextField();
+		finalQuestionTextField.setColumns(10);
+		confirmPanel.add(finalQuestionTextField, "cell 5 9,growx");
+		
+		JLabel thankYouLabel = new JLabel(" ");
+		confirmPanel.add(thankYouLabel, "cell 5 11");
+		
+		JButton printToFileButton = new JButton("Adoption Confirmation Form: Click here for your confirmation");
+		printToFileButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				try
+				{
+					String initialChoice = "";
+					if (!pippinCheckBox.isSelected() && !percyCheckBox.isSelected() && !petuniaCheckBox.isSelected())
+						initialChoice = "Owner is not considering to adopt any guinea pigs at this moment";
+					else if (pippinCheckBox.isSelected() && percyCheckBox.isSelected())
+						initialChoice = pippinCheckBox.getText() + " and " + percyCheckBox.getText();
+					else if (pippinCheckBox.isSelected() && petuniaCheckBox.isSelected())
+						initialChoice = pippinCheckBox.getText() + " and " + petuniaCheckBox.getText();
+					else if (petuniaCheckBox.isSelected() && percyCheckBox.isSelected())
+						initialChoice = percyCheckBox.getText()  + " and " + petuniaCheckBox.getText();
+					else if (petuniaCheckBox.isSelected())
+						initialChoice = petuniaCheckBox.getText();
+					else if (percyCheckBox.isSelected())
+						initialChoice = percyCheckBox.getText();
+					else
+						initialChoice = pippinCheckBox.getText();
+					
+					
+					String finalChoice = "";
+					if (percyRadButton.isSelected())
+						finalChoice = percyRadButton.getText();
+					else if (pippinRadButton.isSelected())
+						finalChoice = pippinRadButton.getText();
+					else
+						finalChoice = petuniaRadButton.getText();
+					
+					
+					String initialPetConsideration = initialChoice;
+					String finalDecision = finalChoice;
+					String firstLastName = endTextField.getText();
+					String phoneNumber = secondEndTextField.getText();
+					String availability = (String) comboBox.getSelectedItem();
+					String howFindOut = finalQuestionTextField.getText();
+					
+					printedResults.add(new PoofyPurrfectPets(initialPetConsideration, finalDecision, firstLastName, phoneNumber, availability, howFindOut));
+				
+					//write to the file
+					FileWriter writer = new FileWriter(new File("adoptionList.txt"));
+					for (int i = 0; i < printedResults.size(); i++)
+					{
+						PoofyPurrfectPets adopter = printedResults.get(i);
+						//Guinea Pigs that owner is considering to adopt after initial consideration
+						if (!pippinCheckBox.isSelected() && !percyCheckBox.isSelected() && !petuniaCheckBox.isSelected())
+							writer.write("Owner is not considering to adopt any guinea pigs at this moment");
+						else if (pippinCheckBox.isSelected() && percyCheckBox.isSelected())
+							writer.write(pippinCheckBox.getText() + " and " + percyCheckBox.getText());
+						else if (pippinCheckBox.isSelected() && petuniaCheckBox.isSelected())
+							writer.write(pippinCheckBox.getText() + " and " + petuniaCheckBox.getText());
+						else if (petuniaCheckBox.isSelected() && percyCheckBox.isSelected())
+							writer.write(percyCheckBox.getText()  + " and " + petuniaCheckBox.getText());
+						else if (petuniaCheckBox.isSelected())
+							writer.write(initialChoice = petuniaCheckBox.getText());
+						else if (percyCheckBox.isSelected())
+							writer.write(initialChoice = percyCheckBox.getText());
+						else
+							writer.write(pippinCheckBox.getText());
+						writer.write(System.getProperty("line.separator"));
+						
+						//Final decision of which guinea pig the owner wants to adopt
+						if (percyRadButton.isSelected())
+							writer.write(percyRadButton.getText());
+						else if (pippinRadButton.isSelected())
+							writer.write(pippinRadButton.getText());
+						else
+							writer.write(petuniaRadButton.getText());
+						writer.write(System.getProperty("line.separator"));
+						
+						//Owner's first and last name
+						writer.write(adopter.getName());
+						writer.write(System.getProperty("line.separator"));
+
+						//Owner's phone number
+						writer.write(adopter.getPhoneNumber());
+						writer.write(System.getProperty("line.separator"));
+
+						//Owner's availability
+						writer.write(adopter.getAvailability());
+						writer.write(System.getProperty("line.separator"));
+						
+						//How did the owner find out about the adoption center?
+						writer.write(adopter.getHowFindOut());
+						writer.write(System.getProperty("line.separator"));
+						
+						if(i != printedResults.size() - 1)
+                           writer.write(System.getProperty("line.separator"));
+					}
+					writer.close();
+	
+			}
+				
+		catch(Exception err)
+		{
+			System.out.println(err.getMessage());
+		}
+			}
+		});
+		confirmPanel.add(printToFileButton, "cell 5 10");
+		
+		
+		//read from file
+		JButton saveButton = new JButton("Save your confirmation");
+		saveButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try
+				{
+					Scanner inFile = new Scanner(new File("adoptionList.txt"));
+					while (inFile.hasNextLine())
+					{
+						String initial = inFile.nextLine();
+						String finalChoice = inFile.nextLine();
+						String name = inFile.nextLine();
+						String phone = inFile.nextLine();
+						String avail = inFile.nextLine();
+						String findOut = inFile.nextLine();
+						
+						printedResults.add(new PoofyPurrfectPets(initial, finalChoice, name, phone, avail, findOut));
+						adoptionsModel.insertRow(adoptionsModel.getRowCount(), new String[] {initial, finalChoice, name, phone, avail, findOut});
+					}
+					thankYouLabel.setText("Thank you! Your adoption forms are now complete.");
+				}
+				catch(Exception err) 
+				{
+					System.out.println(err.getMessage());
+				}
+			}
+		});
+		confirmPanel.add(saveButton, "flowx,cell 5 11");
+
+	}
+}
+
