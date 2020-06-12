@@ -1,0 +1,49 @@
+public class PoofyPurrfectPets 
+{
+	private String myInitialPetConsideration;
+	private String myFinalDecision;
+	private String myFirstLastName;
+	private String myPhoneNumber;
+	private String myAvailability;
+	private String myHowFindOut;
+	
+	public PoofyPurrfectPets(String initialPetConsideration, String finalDecision, String firstLastName, String phoneNumber, String availability, String howFindOut)
+	{
+		myInitialPetConsideration = initialPetConsideration;
+		myFinalDecision = finalDecision;
+		myFirstLastName = firstLastName;
+		myPhoneNumber = phoneNumber;
+		myAvailability = availability;
+		myHowFindOut = howFindOut;
+	}
+	
+	public String getInitialConsideration()
+	{
+		return myInitialPetConsideration;
+	}
+	
+	public String getFinalDecision()
+	{
+		return myFinalDecision;
+	}
+	
+	public String getName()
+	{
+		return myFirstLastName;
+	}
+	
+	public String getPhoneNumber()
+	{
+		return myPhoneNumber;
+	}
+	
+	public String getAvailability()
+	{
+		return myAvailability;
+	}
+	
+	public String getHowFindOut()
+	{
+		return myHowFindOut;
+	}
+}
